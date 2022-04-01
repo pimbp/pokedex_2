@@ -17,7 +17,7 @@ exports.returnPokemon = (req, res)=>{
     if(req.query["name"]){
         let name = req.query.name;
         tempArray = tempArray.filter((element)=>{
-            if(element.name.english.toLowerCase().includes(name))
+            if(element.name.english.toLowerCase().includes(name.toLowerCase()))
                 return element;
         });
     }
@@ -36,19 +36,25 @@ exports.returnPokemon = (req, res)=>{
     }
 
     if(req.query["sortByName"] == 'asc'){
-        tempArray.sort((a, b) => a.name.english.localeCompare(b.name.english));
+            console.log('ds');
+            tempArray.sort((a, b) => {
+            return a.name.english.localeCompare(b.name.english);
+        });
     }
 
     if(req.query["sortByName"] == 'desc'){
-        tempArray.sort((a, b) => b.name.english.localeCompare(a.name.english));
+        tempArray.sort((a, b) => {
+            return b.name.english.localeCompare(a.name.english);
+        });
     }
 
     if(req.query["sortById"] == 'desc'){
         tempArray.sort((a, b) => b.id - a.id);
-    }else{
+    }else if(req.query["sortById"] == 'asc'){
         tempArray.sort((a, b) => a.id - b.id);
     }
-    res.status(res.locals.status).json(tempArray);
+    res.json(tempArray);
+    //status(res.locals.status).
 }
 
 exports.deletePokemon = (req, res) => {
