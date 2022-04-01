@@ -1,4 +1,5 @@
 # pokedex_2
+# pimbp
 ## GET localhost:8000/api/pokedex
 Returns entire pokedex
 - can be filtered with query params: name, type[2], sortByName ('asc' or 'desc'), sortById ('asc' or 'desc')
