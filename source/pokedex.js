@@ -13,6 +13,7 @@ exports.loadPokemon = (req, res, next)=>{
 
 exports.returnPokemon = (req, res)=>{
     let tempArray = res.locals.pokemon;
+
     if(req.query["name"]){
         let name = req.query.name;
         tempArray = tempArray.filter((element)=>{
@@ -20,6 +21,7 @@ exports.returnPokemon = (req, res)=>{
                 return element;
         });
     }
+
     if(req.query["type"]){
         let types = req.query.type;
         tempArray = tempArray.filter((element)=>{
@@ -30,6 +32,18 @@ exports.returnPokemon = (req, res)=>{
                 if(element.type.find(type => type == types[0]) && element.type.find(type => type == types[1]))
                     return element;
             }
+        });
+    }
+
+    if(req.query["sortByName"] == 'asc'){
+        tempArray.sort((a, b) => {
+            return a.name.english.localeCompare(b.name.english);
+        });
+    }
+
+    if(req.query["sortByName"] == 'desc'){
+        tempArray.sort((a, b) => {
+            return b.name.english.localeCompare(a.name.english);
         });
     }
     res.status(res.locals.status).json(tempArray);
