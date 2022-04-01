@@ -49,19 +49,11 @@ exports.returnPokemon = (req, res)=>{
 
     if(req.query["sortById"] == 'desc'){
         tempArray.sort((a, b) => {
-            if(a.id > b.id)
-                return -1;
-            if(b.id > a.id)
-                return 1;
-            return 0;
+            return b.id - a.id;
         });
     }else{
         tempArray.sort((a, b) => {
-            if(a.id > b.id)
-                return 1;
-            if(b.id > a.id)
-                return -1;
-            return 0;
+            return a.id - b.id;
         });
     }
     res.status(res.locals.status).json(tempArray);
