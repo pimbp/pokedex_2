@@ -55,6 +55,14 @@ exports.returnPokemon = (req, res)=>{
                 return 1;
             return 0;
         });
+    }else{
+        tempArray.sort((a, b) => {
+            if(a.id > b.id)
+                return 1;
+            if(b.id > a.id)
+                return -1;
+            return 0;
+        });
     }
     res.status(res.locals.status).json(tempArray);
 }
